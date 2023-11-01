@@ -8,39 +8,25 @@ import React, {Component} from 'react';
 import AccountBalance from './AccountBalance';
 import {Link} from 'react-router-dom';
 
-/*
-const Debits = (props) => {
-  // Create the list of Debit items
-  let debitsView = () => {
-    const { debits } = props;
-    return debits.map((debit) => {  // Extract "id", "amount", "description" and "date" properties of each debits JSON array element
-      let date = debit.date.slice(0,10);
-      return <li key={debit.id}>{debit.amount} {debit.description} {date}</li>
-    });
-  }
-*/
-
 class Debits extends Component {
   constructor (props) {  // Create and initialize state
     super(props)
     this.state = {
       updatedDebits: this.props.debits,
-      newDescription: '',
-      newAmount: 0
+      newDescription: '', //description of the current debit
+      newAmount: 0  //amount of the current debit
     };
-    //console.log(this.state.updatedCredits);
-    //console.log(props);
   }
 
+  //called when the form values change
   handleChange = (e) => {
     //get the current form values
     this.setState({
       [e.target.name] : e.target.value
     })
-    //console.log(this.state.newAmount);
-    //console.log(this.state.newDescription);
   }
 
+  //called when the submit button is pressed
   handleSubmit = (e) => {
     e.preventDefault()  //prevent submitting default values
 
@@ -48,9 +34,6 @@ class Debits extends Component {
     this.setState({
       [e.target.name] : e.target.value
     })
-    //console.log(this.state.newAmount);
-    //console.log(this.state.newDescription);
-
     //pass the form values to function for adding new debit
     console.log(this.state.newAmount);  //newAmount is string
     this.props.addDebit(this.state);
@@ -75,8 +58,14 @@ class Debits extends Component {
       
 
       <form onSubmit={this.handleSubmit}>
-        <input type="text" name="newDescription" value={this.state.newDescription} onChange={this.handleChange}/>
-        <input type="number" name="newAmount" value={this.state.newAmount} onChange={this.handleChange}/>
+        <div>
+          <label>Description</label>
+          <input type="text" name="newDescription" value={this.state.newDescription} onChange={this.handleChange}/>
+        </div>
+        <div>
+          <label>Amount</label>
+          <input type="number" name="newAmount" value={this.state.newAmount} onChange={this.handleChange}/>
+        </div>
         <button type="submit">Add Debit</button>
       </form>
       <br/>

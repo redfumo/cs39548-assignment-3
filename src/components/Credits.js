@@ -9,50 +9,32 @@ import ReactDOM from 'react-dom';
 import AccountBalance from './AccountBalance';
 import {Link} from 'react-router-dom';
 
-/*
-const Credits = (props) => {
-  return (
-    <div>
-      <h1>Credits</h1>
-      <br/>
-      
-      <Link to="/">Return to Home</Link>
-    </div>
-  );
-}
-*/
-
 class Credits extends Component {
   constructor (props) {  // Create and initialize state
     super(props)
     this.state = {
       updatedCredits: this.props.credits,
-      newDescription: '',
-      newAmount: 0
+      newDescription: '', //description of the current credit
+      newAmount: 0  //amount of the current credit
     };
-    //console.log(this.state.updatedCredits);
-    //console.log(props);
   }
 
+  //called when the form values change
   handleChange = (e) => {
     //get the current form values
     this.setState({
       [e.target.name] : e.target.value
     })
-    //console.log(this.state.newAmount);
-    //console.log(this.state.newDescription);
   }
 
+  //called when the submit button is pressed
   handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault()  //prevent submitting default values
 
     //get the final form values
     this.setState({
       [e.target.name] : e.target.value
     })
-    //console.log(this.state.newAmount);
-    //console.log(this.state.newDescription);
-
     //pass the form values to function for adding new credit
     console.log(this.state.newAmount);  //newAmount is string
     this.props.addCredit(this.state);
@@ -70,18 +52,22 @@ class Credits extends Component {
     return (
       <div>
         <h1>Credits</h1>
-        <div id='creditsplace'> 
-          {/*this.state.updatedCredits*/}
+        <div> 
           {this.creditsView()}
         </div>
         
 
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="newDescription" value={this.state.newDescription} onChange={this.handleChange}/>
-          <input type="number" name="newAmount" value={this.state.newAmount} onChange={this.handleChange}/>
+          <div>
+            <label>Description</label>
+            <input type="text" name="newDescription" value={this.state.newDescription} onChange={this.handleChange}/>
+          </div>
+          <div>
+            <label>Amount</label>
+            <input type="number" name="newAmount" value={this.state.newAmount} onChange={this.handleChange}/>             
+          </div>
           <button type="submit">Add Credit</button>
         </form>
-
         <br/>
         <AccountBalance accountBalance={this.props.accountBalance}/>
         <hr/>
