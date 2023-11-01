@@ -47,6 +47,8 @@ class App extends Component {
       //return <li key={credit.id}>{credit.amount} {credit.description} {date}</li>
     //}
     //console.log(CreditArray);
+
+    //initialize the default credit list entries
     for (let i = 0; i < CreditArray.length; i++) {
       //console.log(CreditArray[i]);
       let d = CreditArray[i].date.slice(0,10); //get date from json file
@@ -61,6 +63,22 @@ class App extends Component {
     
   }
 
+  //add credit entry to the creditList array
+  addCredit = (newCredit) => {
+    //console.log(newCredit);
+    var date = new Date();  //get the current date
+    //console.log(date);
+    //console.log(date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate());
+    date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(); //format date
+    //console.log(date);
+    let temp = [];  //create new array
+    temp.push(parseFloat(newCredit.newAmount).toFixed(2));  //add the new amount of money, rounds up 2 decimal places 
+    temp.push(newCredit.newDescription);  //add the new description
+    temp.push(date);  //add the current date
+    this.state.creditList.push(temp); //add the new credit to the main list of credits
+    //console.log(this.state.creditList);
+  }
+
   // Create Routes and React elements to be rendered using React components
   render() {   
     // Create React elements and pass input props to components
@@ -69,7 +87,7 @@ class App extends Component {
       <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} />
     )
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
-    const CreditsComponent = () => (<Credits credits={this.state.creditList} accountBalance={this.state.accountBalance} />) 
+    const CreditsComponent = () => (<Credits credits={this.state.creditList} accountBalance={this.state.accountBalance} addCredit={this.addCredit} />) 
     const DebitsComponent = () => (<Debits debits={this.state.debitList} />) 
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages

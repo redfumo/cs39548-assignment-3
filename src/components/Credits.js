@@ -26,9 +26,9 @@ class Credits extends Component {
   constructor (props) {  // Create and initialize state
     super(props)
     this.state = {
-      updatedCredits: this.props.credits
-        
-      
+      updatedCredits: this.props.credits,
+      newDescription: '',
+      newAmount: 0
     };
     //console.log(this.state.updatedCredits);
     //console.log(props);
@@ -49,18 +49,48 @@ class Credits extends Component {
     //const name = e.target.name;
     //const value = e.target.value;
     //setInputs(values => ({...values, [name]: value}))
-    const value = e.target.value;
+    //const value = e.target.value;
+    //this.setState({
+    //  ...this.state,
+    //  [e.target.name]: value
+    //});
+    //const temp = {...this.state.updatedCredits};
+
+    //const temp = {...this.state.newCreditInfo};
+    //console.log(this.state.newCreditInfo);
+    //const newArray = [];
+    //temp.amount = e.target.value;
+    //temp.description = e.target.value;
+    //this.setState({newCreditInfo: temp});
+    //temp.push();
+
+    //get the current form values
     this.setState({
-      ...this.state,
-      [e.target.name]: value
-    });
+      [e.target.name] : e.target.value
+    })
+
+    //console.log(this.state.newAmount);
+    //console.log(this.state.newDescription);
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
     //this.props.addCredit(this.state.updatedCredits);
     //console.log(inputs);
-    console.log(this.setState);
+    //console.log(this.setState);
+
+    //this.props.mockLogIn(this.state.user)  // Update state in the top-level component (App.js)
+    //this.setState({redirect: true})  // Update state to trigger Redirect
+    
+    //get the final form values
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+    //console.log(this.state.newAmount);
+    //console.log(this.state.newDescription);
+
+    //pass the form values to function for adding new credit
+    this.props.addCredit(this.state);
   }
 
   creditsView = () => {
@@ -92,8 +122,8 @@ class Credits extends Component {
         
 
         <form onSubmit={this.handleSubmit}>
-          <input type="text" name="description" value={this.state.desc} onChange={this.handleChange}/>
-          <input type="number" name="amount" value={this.state.money} onChange={this.handleChange}/>
+          <input type="text" name="newDescription" value={this.state.newDescription} onChange={this.handleChange}/>
+          <input type="number" name="newAmount" value={this.state.newAmount} onChange={this.handleChange}/>
           <button type="submit">Add Credit</button>
         </form>
 
