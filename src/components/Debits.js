@@ -35,7 +35,6 @@ class Debits extends Component {
       [e.target.name] : e.target.value
     })
     //pass the form values to function for adding new debit
-    console.log(this.state.newAmount);  //newAmount is string
     this.props.addDebit(this.state);
   }
 

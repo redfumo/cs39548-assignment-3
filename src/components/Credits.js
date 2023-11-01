@@ -36,7 +36,6 @@ class Credits extends Component {
       [e.target.name] : e.target.value
     })
     //pass the form values to function for adding new credit
-    console.log(this.state.newAmount);  //newAmount is string
     this.props.addCredit(this.state);
   }
 
