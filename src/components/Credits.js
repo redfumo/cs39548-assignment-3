@@ -33,55 +33,19 @@ class Credits extends Component {
     //console.log(this.state.updatedCredits);
     //console.log(props);
   }
-  /*
-  testForm() {
-    const [state, setState] = React.useState({
-      desc: "",
-      money: ""
-    });
-  }
-  */
 
   handleChange = (e) => {
-    //const newCredit = {...this.state.updatedCredits};
-    //updatedCredits.push(e.target.value);
-    //this.setState({updatedCredits: newCredit})
-    //const name = e.target.name;
-    //const value = e.target.value;
-    //setInputs(values => ({...values, [name]: value}))
-    //const value = e.target.value;
-    //this.setState({
-    //  ...this.state,
-    //  [e.target.name]: value
-    //});
-    //const temp = {...this.state.updatedCredits};
-
-    //const temp = {...this.state.newCreditInfo};
-    //console.log(this.state.newCreditInfo);
-    //const newArray = [];
-    //temp.amount = e.target.value;
-    //temp.description = e.target.value;
-    //this.setState({newCreditInfo: temp});
-    //temp.push();
-
     //get the current form values
     this.setState({
       [e.target.name] : e.target.value
     })
-
     //console.log(this.state.newAmount);
     //console.log(this.state.newDescription);
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    //this.props.addCredit(this.state.updatedCredits);
-    //console.log(inputs);
-    //console.log(this.setState);
 
-    //this.props.mockLogIn(this.state.user)  // Update state in the top-level component (App.js)
-    //this.setState({redirect: true})  // Update state to trigger Redirect
-    
     //get the final form values
     this.setState({
       [e.target.name] : e.target.value
@@ -90,22 +54,13 @@ class Credits extends Component {
     //console.log(this.state.newDescription);
 
     //pass the form values to function for adding new credit
+    console.log(this.state.newAmount);  //newAmount is string
     this.props.addCredit(this.state);
   }
 
+  //function for printing list of all credits
   creditsView = () => {
-    //console.log("test");
-    //console.log(this.state.updatedCredits);
-    //console.log(this.state.updatedCredits.length);
-    //var list = document.createElement("div");  //create credit list to be put into body
-    //for (let i = 0; i < this.state.updatedCredits.length; i++) {
-      //let currentCredit = this.state.updatedCredits[i]; //get new credit
-      //console.log(currentCredit);
-      //const printCredit = <h3>{currentCredit[0]} {currentCredit[1]} {currentCredit[2]} <br/></h3> //turn array element into text
-      //ReactDOM.render(printCredit, document.getElementById('creditsplace'));
-      //list.appendChild(printCredit);  //add current credit to list
-    //}
-    //return (list);
+    //for each array in the credits array, print out money amount, description, and date
     return this.state.updatedCredits.map((credit) =>{
       return <h4>{credit[0]} {credit[1]} {credit[2]} <br/></h4>
     });

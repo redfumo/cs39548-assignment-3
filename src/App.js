@@ -20,7 +20,7 @@ class App extends Component {
   constructor() {  // Create and initialize state
     super(); 
     this.state = {
-      accountBalance: 1234567.89,
+      accountBalance: 0.00,
       creditList: [],
       debitList: [],
       currentUser: {
@@ -38,6 +38,7 @@ class App extends Component {
     this.setState({currentUser: newUser})
   }
 
+  //called when component mounts
   componentDidMount() {
     console.log("test test");
     //then update credit list and debit list?
@@ -58,6 +59,7 @@ class App extends Component {
       temp.push(CreditArray[i].description);  //add description
       temp.push(d);  //add date
       this.state.creditList.push(temp); //push array to creditList
+      this.state.accountBalance += CreditArray[i].amount; //add money to account balance
     }
     console.log(this.state.creditList);
     
@@ -65,17 +67,18 @@ class App extends Component {
 
   //add credit entry to the creditList array
   addCredit = (newCredit) => {
-    //console.log(newCredit);
     var date = new Date();  //get the current date
-    //console.log(date);
-    //console.log(date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate());
     date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(); //format date
-    //console.log(date);
+
     let temp = [];  //create new array
     temp.push(parseFloat(newCredit.newAmount).toFixed(2));  //add the new amount of money, rounds up 2 decimal places 
     temp.push(newCredit.newDescription);  //add the new description
     temp.push(date);  //add the current date
+
     this.state.creditList.push(temp); //add the new credit to the main list of credits
+    this.state.accountBalance += parseFloat(newCredit.newAmount); //add credit to the total account balance
+    
+    console.log(this.state.accountBalance);
     //console.log(this.state.creditList);
   }
 
