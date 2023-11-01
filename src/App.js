@@ -15,6 +15,7 @@ import Credits from './components/Credits';
 import Debits from './components/Debits';
 import CreditArray from './credits.json';
 import DebitArray from './debits.json';
+import AccountBalance from './components/AccountBalance';
 
 class App extends Component {
   constructor() {  // Create and initialize state
@@ -28,7 +29,6 @@ class App extends Component {
         memberSince: '11/22/99',
       }
     };
-    console.log(this.state.creditList);
   }
 
   // Update state's currentUser (userName) after "Log In" button is clicked
@@ -40,35 +40,24 @@ class App extends Component {
 
   //called when component mounts
   componentDidMount() {
-    console.log("test test");
-    //then update credit list and debit list?
-    //CreditArray.map
-    //CreditArray.map((credit)) => {  // Extract "id", "amount", "description" and "date" properties of each debits JSON array element
-      //let date = credit.date.slice(0,10);
-      //return <li key={credit.id}>{credit.amount} {credit.description} {date}</li>
-    //}
-    //console.log(CreditArray);
-
     //initialize the default credit list entries
     for (let i = 0; i < CreditArray.length; i++) {
-      //console.log(CreditArray[i]);
       let d = CreditArray[i].date.slice(0,10); //get date from json file
-      //console.log(date);
+
       let temp = [];  //create new array
       temp.push(CreditArray[i].amount); //add money amount to array
       temp.push(CreditArray[i].description);  //add description
       temp.push(d);  //add date
+
       this.state.creditList.push(temp); //push array to creditList
       this.state.accountBalance += CreditArray[i].amount; //add money to account balance
     }
-    console.log(this.state.creditList);
     
     //initialize the default debit list entries
     for (let i = 0; i < DebitArray.length; i++) {
       let d = DebitArray[i].date.slice(0,10); //get date from json file
 
       let temp = [];  //create new array
-      //temp.push(DebitArray[i].amount);  //add money amount to array
       temp.push(parseFloat(DebitArray[i].amount).toFixed(2));  //add money amount to array (with two decimal places)
       temp.push(DebitArray[i].description);  //add description
       temp.push(d);  //add date
@@ -90,9 +79,8 @@ class App extends Component {
 
     this.state.creditList.push(temp); //add the new credit to the main list of credits
     this.state.accountBalance += parseFloat(newCredit.newAmount); //add credit to the total account balance
-    
-    console.log(this.state.accountBalance);
-    //console.log(this.state.creditList);
+
+    this.setState({});  //update the account balance to the new balance
   }
 
   //add debit entry to the debitList array, subtract debits from account balance
@@ -107,9 +95,8 @@ class App extends Component {
 
     this.state.debitList.push(temp);  //add the new debit to the main list of debits
     this.state.accountBalance -= parseFloat(newDebit.newAmount);  //subtract debit from the total account balance
-    
-    console.log(this.state.accountBalance);
-    console.log(this.state.debitList);
+
+    this.setState({});  //update the account balance to the new balance
   }
 
   // Create Routes and React elements to be rendered using React components
