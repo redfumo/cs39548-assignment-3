@@ -15,6 +15,7 @@ import Credits from './components/Credits';
 import Debits from './components/Debits';
 import CreditArray from './credits.json';
 import DebitArray from './debits.json';
+import AccountBalance from './components/AccountBalance';
 
 class App extends Component {
   constructor() {  // Create and initialize state
@@ -92,6 +93,8 @@ class App extends Component {
     this.state.accountBalance += parseFloat(newCredit.newAmount); //add credit to the total account balance
     
     console.log(this.state.accountBalance);
+    //this.forceUpdate();
+    this.setState({});  //update the account balance to the new balance
     //console.log(this.state.creditList);
   }
 
@@ -109,7 +112,8 @@ class App extends Component {
     this.state.accountBalance -= parseFloat(newDebit.newAmount);  //subtract debit from the total account balance
     
     console.log(this.state.accountBalance);
-    console.log(this.state.debitList);
+    //console.log(this.state.debitList);
+    this.setState({});  //update the account balance to the new balance
   }
 
   // Create Routes and React elements to be rendered using React components
