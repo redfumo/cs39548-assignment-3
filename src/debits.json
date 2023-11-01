@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "description": "PC Monitor",
+    "amount": 150.10,
+    "date": "2001-12-05T06:52:40Z"
+  },
+  {
+    "id": 2,
+    "description": "Apple iPhone",
+    "amount": 687.35,
+    "date": "2004-01-25T17:27:37Z"
+  },
+  {
+    "id": 3,
+    "description": "Grocery",
+    "amount": 43.99,
+    "date": "2009-09-01T04:20:02Z"
+  },
+  {
+    "id": 4,
+    "description": "Utilities",
+    "amount": 901.67,
+    "date": "2011-07-12T09:33:07Z"
+  },
+  {
+    "id": 5,
+    "description": "Garden Plants",
+    "amount": 78.25,
+    "date": "2016-11-30T04:26:40Z"
+  }
+]

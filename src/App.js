@@ -63,6 +63,19 @@ class App extends Component {
     }
     console.log(this.state.creditList);
     
+    //initialize the default debit list entries
+    for (let i = 0; i < DebitArray.length; i++) {
+      let d = DebitArray[i].date.slice(0,10); //get date from json file
+
+      let temp = [];  //create new array
+      //temp.push(DebitArray[i].amount);  //add money amount to array
+      temp.push(parseFloat(DebitArray[i].amount).toFixed(2));  //add money amount to array (with two decimal places)
+      temp.push(DebitArray[i].description);  //add description
+      temp.push(d);  //add date
+
+      this.state.debitList.push(temp);  //push array to debitList
+      this.state.accountBalance -= DebitArray[i].amount;  //subtract money from account balance
+    }
   }
 
   //add credit entry to the creditList array
@@ -91,7 +104,7 @@ class App extends Component {
     )
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
     const CreditsComponent = () => (<Credits credits={this.state.creditList} accountBalance={this.state.accountBalance} addCredit={this.addCredit} />) 
-    const DebitsComponent = () => (<Debits debits={this.state.debitList} />) 
+    const DebitsComponent = () => (<Debits debits={this.state.debitList} accountBalance={this.state.accountBalance} />) 
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
