@@ -32,7 +32,28 @@ class Debits extends Component {
     //console.log(props);
   }
 
+  handleChange = (e) => {
+    //get the current form values
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+    //console.log(this.state.newAmount);
+    //console.log(this.state.newDescription);
+  }
+
   handleSubmit = (e) => {
+    e.preventDefault()  //prevent submitting default values
+
+    //get the final form values
+    this.setState({
+      [e.target.name] : e.target.value
+    })
+    //console.log(this.state.newAmount);
+    //console.log(this.state.newDescription);
+
+    //pass the form values to function for adding new debit
+    console.log(this.state.newAmount);  //newAmount is string
+    this.props.addDebit(this.state);
   }
 
   //function for printing list of all debits
@@ -54,8 +75,8 @@ class Debits extends Component {
       
 
       <form onSubmit={this.handleSubmit}>
-        <input type="text" name="description" />
-        <input type="number" name="amount" />
+        <input type="text" name="newDescription" value={this.state.newDescription} onChange={this.handleChange}/>
+        <input type="number" name="newAmount" value={this.state.newAmount} onChange={this.handleChange}/>
         <button type="submit">Add Debit</button>
       </form>
       <br/>
