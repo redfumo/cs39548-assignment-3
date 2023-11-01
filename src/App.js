@@ -63,9 +63,22 @@ class App extends Component {
     }
     console.log(this.state.creditList);
     
+    //initialize the default debit list entries
+    for (let i = 0; i < DebitArray.length; i++) {
+      let d = DebitArray[i].date.slice(0,10); //get date from json file
+
+      let temp = [];  //create new array
+      //temp.push(DebitArray[i].amount);  //add money amount to array
+      temp.push(parseFloat(DebitArray[i].amount).toFixed(2));  //add money amount to array (with two decimal places)
+      temp.push(DebitArray[i].description);  //add description
+      temp.push(d);  //add date
+
+      this.state.debitList.push(temp);  //push array to debitList
+      this.state.accountBalance -= DebitArray[i].amount;  //subtract money from account balance
+    }
   }
 
-  //add credit entry to the creditList array
+  //add credit entry to the creditList array, add credits to the account balance
   addCredit = (newCredit) => {
     var date = new Date();  //get the current date
     date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(); //format date
@@ -82,6 +95,23 @@ class App extends Component {
     //console.log(this.state.creditList);
   }
 
+  //add debit entry to the debitList array, subtract debits from account balance
+  addDebit = (newDebit) => {
+    var date = new Date();  //get the current date
+    date = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate(); //format date
+
+    let temp = [];  //create new array
+    temp.push(parseFloat(newDebit.newAmount).toFixed(2));  //add the new amount of money, rounds up 2 decimal places 
+    temp.push(newDebit.newDescription);  //add the new description
+    temp.push(date);  //add the current date
+
+    this.state.debitList.push(temp);  //add the new debit to the main list of debits
+    this.state.accountBalance -= parseFloat(newDebit.newAmount);  //subtract debit from the total account balance
+    
+    console.log(this.state.accountBalance);
+    console.log(this.state.debitList);
+  }
+
   // Create Routes and React elements to be rendered using React components
   render() {   
     // Create React elements and pass input props to components
@@ -91,7 +121,7 @@ class App extends Component {
     )
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
     const CreditsComponent = () => (<Credits credits={this.state.creditList} accountBalance={this.state.accountBalance} addCredit={this.addCredit} />) 
-    const DebitsComponent = () => (<Debits debits={this.state.debitList} />) 
+    const DebitsComponent = () => (<Debits debits={this.state.debitList} accountBalance={this.state.accountBalance} addDebit={this.addDebit}/>) 
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages
     return (
