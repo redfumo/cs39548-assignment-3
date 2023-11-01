@@ -13,6 +13,8 @@ import UserProfile from './components/UserProfile';
 import LogIn from './components/Login';
 import Credits from './components/Credits';
 import Debits from './components/Debits';
+import CreditArray from './credits.json';
+import DebitArray from './debits.json';
 
 class App extends Component {
   constructor() {  // Create and initialize state
@@ -26,6 +28,7 @@ class App extends Component {
         memberSince: '11/22/99',
       }
     };
+    console.log(this.state.creditList);
   }
 
   // Update state's currentUser (userName) after "Log In" button is clicked
@@ -33,6 +36,29 @@ class App extends Component {
     const newUser = {...this.state.currentUser};
     newUser.userName = logInInfo.userName;
     this.setState({currentUser: newUser})
+  }
+
+  componentDidMount() {
+    console.log("test test");
+    //then update credit list and debit list?
+    //CreditArray.map
+    //CreditArray.map((credit)) => {  // Extract "id", "amount", "description" and "date" properties of each debits JSON array element
+      //let date = credit.date.slice(0,10);
+      //return <li key={credit.id}>{credit.amount} {credit.description} {date}</li>
+    //}
+    //console.log(CreditArray);
+    for (let i = 0; i < CreditArray.length; i++) {
+      //console.log(CreditArray[i]);
+      let d = CreditArray[i].date.slice(0,10); //get date from json file
+      //console.log(date);
+      let temp = [];  //create new array
+      temp.push(CreditArray[i].amount); //add money amount to array
+      temp.push(CreditArray[i].description);  //add description
+      temp.push(d);  //add date
+      this.state.creditList.push(temp); //push array to creditList
+    }
+    console.log(this.state.creditList);
+    
   }
 
   // Create Routes and React elements to be rendered using React components
@@ -43,7 +69,7 @@ class App extends Component {
       <UserProfile userName={this.state.currentUser.userName} memberSince={this.state.currentUser.memberSince} />
     )
     const LogInComponent = () => (<LogIn user={this.state.currentUser} mockLogIn={this.mockLogIn} />)
-    const CreditsComponent = () => (<Credits credits={this.state.creditList} />) 
+    const CreditsComponent = () => (<Credits credits={this.state.creditList} accountBalance={this.state.accountBalance} />) 
     const DebitsComponent = () => (<Debits debits={this.state.debitList} />) 
 
     // Important: Include the "basename" in Router, which is needed for deploying the React app to GitHub Pages

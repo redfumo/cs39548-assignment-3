@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "description": "Tutoring",
+    "amount": 200.78,
+    "date": "2003-09-17T15:58:49Z"
+  },
+  {
+    "id": 2,
+    "description": "Deck Installation",
+    "amount": 587.23,
+    "date": "2004-09-02T20:32:57Z"
+  },
+  {
+    "id": 3,
+    "description": "House Painting",
+    "amount": 479.76,
+    "date": "2005-06-14T18:22:47Z"
+  },
+  {
+    "id": 4,
+    "description": "Coding Project",
+    "amount": 1274.33,
+    "date": "2013-10-18T01:55:44Z"
+  },
+  {
+    "id": 5,
+    "description": "Delivery",
+    "amount": 98.51,
+    "date": "2019-03-09T10:46:14Z"
+  }
+]
