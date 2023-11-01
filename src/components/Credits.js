@@ -100,7 +100,7 @@ class Credits extends Component {
         <br/>
         <AccountBalance accountBalance={this.props.accountBalance}/>
         <hr/>
-        <Link to="/">Return to Home</Link>
+        <Link to="/">Return to Home</Link> 
     </div>
     );
   }
